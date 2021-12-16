@@ -5,48 +5,48 @@
 
 using namespace std;
 
-void ArrRead(vector<vector<int>> &arr, int n, int m) {
+const int N = 100;
+
+void ArrRead(int arr[N][N], int n, int m) {
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
-            int temp;
-            cin >> temp;
-            arr[i].push_back(temp);
+            cin >> arr[i][j];
         }
     }
 }
 
-void ArrPrint(vector<vector<int>> &arr) {
-    for (int i = 0; i < arr.size(); ++i) {
-        for (int j = 0; j < arr[i].size(); ++j) {
+void ArrPrint(int arr[N][N], int n, int m) {
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
             cout << arr[i][j] << ' ';
         }
         cout << endl;
     }
 }
 
-int GetMin(vector<vector<int>> &arr) {
+int GetMin(int arr[N][N], int n, int m) {
     int mn = INT_MAX;
-    for (int i = 0; i < arr.size(); ++i) {
-        for (int j = 0; j < arr[i].size(); ++j) {
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
             mn = min(arr[i][j], mn);
         }
     }
     return mn;
 }
 
-int GetMax(vector<vector<int>> &arr) {
+int GetMax(int arr[N][N], int n, int m) {
     int mx = INT_MIN;
-    for (int i = 0; i < arr.size(); ++i) {
-        for (int j = 0; j < arr[i].size(); ++j) {
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
             mx = max(arr[i][j], mx);
         }
     }
     return mx;
 }
 
-int ArrSort(vector<vector<int>> &arr) {
-    for (int i = 0; i < arr.size(); ++i) {
-        sort(arr[i].begin(), arr[i].end());
+int ArrSort(int arr[N][N], int n, int m) {
+    for (int i = 0; i < n; ++i) {
+        sort(arr[i], arr[i] + m);
     }
 }
 
@@ -60,11 +60,11 @@ int SumNum(int n) {
 }
 
 int main() {
-    int n, m;
-    cin >> n >> m;
-    vector<vector<int>> arr(n);
-    ArrRead(arr, n, m);
-    if (SumNum(GetMin(arr)) == SumNum(GetMax(arr)))ArrSort(arr);
-    ArrPrint(arr);
+    int n;
+    cin >> n;
+    int arr[N][N];
+    ArrRead(arr, n, n);
+    if (SumNum(GetMin(arr, n, n)) == SumNum(GetMax(arr, n, n)))ArrSort(arr, n, n);
+    ArrPrint(arr, n, n);
     return 0;
 }
