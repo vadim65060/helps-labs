@@ -27,7 +27,7 @@ int main() {
     string s;
     vector<string> res;
     while (cin >> s) {
-        if(s=="0")break;
+        if (s == "0")break;
         if (check(s)) {
             res.push_back(s);
         }
