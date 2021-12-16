@@ -31,21 +31,14 @@ bool cmp(int a, int b) {
 }
 
 int main() {
-    int n, m;
-    cin >> n >> m;
-    int a[n][m];
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
-            cin >> a[i][j];
-        }
+    int n;
+    cin >> n;
+    int a[n];
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
     }
-    long long mxMult = 0;
-    for (int j = 0; j < m; ++j) {
-        long long mult = 1;
-        for (int i = 0; i < n; ++i) {
-            mult *= a[i][j];
-        }
-        mxMult = max(mxMult, mult);
+    sort(a, a + n, cmp);
+    for (int i = 0; i < n; i++) {
+        cout << a[i] << ' ';
     }
-    cout<<endl<<mxMult;
 }
