@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <algorithm>
 
 using namespace std;
@@ -20,27 +19,39 @@ bool cmp(const string &a, const string &b) {
     return a < b;
 }
 
+void AddStr(string arr[], int &k, string &s, int n) {
+    int mxLen = 0, mxLenId = -1;
+    for (int i = 0; i < k; ++i) {
+        if (arr[i] == s)return;
+        if (arr[i].size() > mxLen) {
+            mxLen = arr[i].size();
+            mxLenId = i;
+        }
+    }
+    if (k < n) {
+        arr[k] = s;
+        ++k;
+        return;
+    }
+    if (mxLen > s.size())arr[mxLenId] = s;
+}
+
 int main() {
     int n;
     cin >> n;
     //freopen("input.txt","r",stdin);
     string s;
-    vector<string> res;
+    string res[n];
+    int k = 0;
     while (cin >> s) {
-        if (s == "0")break;
+        //if (s == "0")break;
         if (check(s)) {
-            res.push_back(s);
+            AddStr(res, k, s, n);
         }
     }
-    sort(res.begin(), res.end(), cmp);
+    sort(res, res + k, cmp);
     //freopen("output.txt","w",stdout);
-    int k = 1;
-    cout << res[0] << ' ';
-    for (int i = 1; i < res.size(); ++i) {
-        if (res[i] != res[i - 1]) {
-            cout << res[i] << ' ';
-            k++;
-        }
-        if (k == n)return 0;
+    for (int i = 0; i < k; ++i) {
+        cout << res[i] << ' ';
     }
 }
